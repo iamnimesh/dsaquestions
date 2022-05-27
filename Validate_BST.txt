@@ -1,0 +1,68 @@
+
+class Solution {
+public:
+    
+    bool checkBST(TreeNode* root,int mn,int mx)
+    {
+        if(root==NULL)
+            return true;
+        
+        if( (root->right!=NULL) and root->val==INT_MAX)return false;
+        
+        if( (root->left!=NULL) and root->val==INT_MIN)return false;
+        
+        if((root->val<=mx) and (root->val>=mn))
+        {
+            bool cond1=true;
+            
+        if(root->left and root->val>=INT_MIN+1)
+       cond1=checkBST(root->left,mn,root->val-1);
+
+        if(root->right and root->val+1<=INT_MAX)
+        cond1= cond1 & (checkBST(root->right,root->val+1,mx));
+        
+            return cond1;
+        }
+    return false;
+    }
+    
+    bool isValidBST(TreeNode* root) {
+        //as node<=1e9
+        
+        if(root==NULL)
+            return true;
+    
+        if( (root->right!=NULL) and root->val==INT_MAX)return false;
+        
+        if( (root->left!=NULL) and root->val==INT_MIN)return false;
+        
+        bool cond1=true;
+        
+        if(root->left and root->val>=INT_MIN+1)
+        cond1=checkBST(root->left,INT_MIN,root->val-1);
+
+        if(root->right and root->val+1<=INT_MAX)
+        cond1= cond1 & (checkBST(root->right,root->val+1,INT_MAX));
+        
+        
+        return cond1;
+  
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
